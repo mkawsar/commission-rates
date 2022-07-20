@@ -31,12 +31,12 @@ $currencies = [
     ],
     [
         'symbol' => 'USD',
-        'rate' => $response['rates']['USD'],
+        'rate' => $response['rates']['USD'] ?? 1.1497,
         'precision' => 2,
     ],
     [
         'symbol' => 'JPY',
-        'rate' => $response['rates']['JPY'],
+        'rate' => $response['rates']['JPY'] ?? 129.53,
         'precision' => 0,
     ]
 ];

@@ -6,6 +6,11 @@
             "Transaction\\CommissionFee\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Transaction\\CommissionFee\\Test\\": "tests"
+        }
+    },
     "authors": [
         {
             "name": "Kawsar",
@@ -21,6 +26,7 @@
         "phpunit/phpunit": "^9.5"
     },
     "scripts": {
-        "app-run": "php -f script.php input.csv"
+        "app-run": "php -f script.php input.csv",
+        "test": "./vendor/bin/phpunit tests"
     }
 }
