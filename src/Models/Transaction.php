@@ -2,37 +2,36 @@
 
 namespace Transaction\CommissionFee\Models;
 
+use Cassandra\Date;
+
 class Transaction
 {
     /**
      * @var int
      */
-    protected $transactionID;
+    protected int $transactionID;
 
     /**
      * @var \DateTime
      */
-    protected $transactionDate;
+    protected \DateTime $transactionDate;
 
     /**
      * @var string
      */
-    protected $identificationNumber;
+    protected string $identificationNumber;
 
     /**
      * @var string
      */
-    protected $userType;
+    protected string $userType;
 
     /**
      * @var string
      */
-    protected $operationType;
+    protected string $operationType;
 
-    /**
-     * @var Amount
-     */
-    protected $amount;
+    protected Amount $amount;
 
     /**
      * Transaction constructor.
@@ -61,7 +60,7 @@ class Transaction
         $this->amount = $amount;
     }
 
-    public function getTransactionID()
+    public function getTransactionID(): int
     {
         return $this->transactionID;
     }
@@ -69,7 +68,7 @@ class Transaction
     /**
      * @return int
      */
-    public function getIdentificationNumber()
+    public function getIdentificationNumber(): int
     {
         return $this->identificationNumber;
     }
@@ -77,7 +76,7 @@ class Transaction
     /**
      * @return string
      */
-    public function getOperationType()
+    public function getOperationType(): string
     {
         return $this->operationType;
     }
@@ -85,7 +84,7 @@ class Transaction
     /**
      * @return string
      */
-    public function getUserType()
+    public function getUserType(): string
     {
         return $this->userType;
     }
@@ -93,15 +92,12 @@ class Transaction
     /**
      * @return \DateTime
      */
-    public function getTransactionDate()
+    public function getTransactionDate(): \DateTime
     {
         return $this->transactionDate;
     }
 
-    /**
-     * @return Amount
-     */
-    public function getAmount()
+    public function getAmount(): Amount
     {
         return $this->amount;
     }
@@ -109,7 +105,7 @@ class Transaction
     /**
      * @return string
      */
-    public function getAmountSymbol()
+    public function getAmountSymbol(): string
     {
         return $this->amount->getSymbol();
     }

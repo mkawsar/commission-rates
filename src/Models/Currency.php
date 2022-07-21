@@ -12,7 +12,7 @@ class Currency
     /**
      * @var int|float
      */
-    protected float $rate;
+    protected int|float $rate;
 
     /**
      * @var int
@@ -44,7 +44,7 @@ class Currency
     /**
      * @return int|float
      */
-    public function getRate(): float
+    public function getRate(): int|float
     {
         return $this->rate;
     }

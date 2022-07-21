@@ -7,7 +7,7 @@ class Amount
     /**
      * @var int|float
      */
-    protected $amount;
+    protected int|float $amount;
 
     /**
      * @var string
@@ -34,10 +34,7 @@ class Amount
         return $this->symbol;
     }
 
-    /**
-     * @return int|float
-     */
-    public function getAmount()
+    public function getAmount(): int|float
     {
         return $this->amount;
     }

@@ -5,9 +5,11 @@ An experimental project that parses transactions from a csv file and calculates 
 ## Installation
 
 Clone repository and install dependencies via composer.
+```shell
+composer install
+```
 
-     composer install
-## Demo
+## Running application
 ```shell
 composer app-run
 ``` 
@@ -26,3 +28,7 @@ Or
 ```shell
 ./vendor/bin/phpunit tests
 ```
+
+## Support
+
+If you have any questions or confusion please email me at **mkawsarahmed@outlook.com** or open an issue in the repository.

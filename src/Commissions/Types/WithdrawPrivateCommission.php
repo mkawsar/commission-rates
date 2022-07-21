@@ -25,10 +25,8 @@ class WithdrawPrivateCommission extends Commission implements CommissionTypeInte
         'maxOperations' => 3
     ];
 
-    /**
-     * @var Transaction[]
-     */
-    protected $transactionHistory;
+
+    protected TransactionCollection $transactionHistory;
 
     public function __construct(Transaction $transaction, CurrencyService $currencyService, TransactionCollection $transactionCollection)
     {
@@ -39,7 +37,7 @@ class WithdrawPrivateCommission extends Commission implements CommissionTypeInte
     /**
      * @return Amount
      */
-    public function calculate()
+    public function calculate(): Amount
     {
         $summary = $this->getWeeklyCashOutSummaryOfUser();
 
@@ -67,7 +65,7 @@ class WithdrawPrivateCommission extends Commission implements CommissionTypeInte
     /**
      * @return array
      */
-    private function getWeeklyCashOutSummaryOfUser()
+    private function getWeeklyCashOutSummaryOfUser(): array
     {
         // filter the users transactions in same week and same type
         $weeklyTransactions = $this->getLastWeeksTransactions();
@@ -100,7 +98,7 @@ class WithdrawPrivateCommission extends Commission implements CommissionTypeInte
     /**
      * @return Transaction[]
      */
-    private function getLastWeeksTransactions()
+    private function getLastWeeksTransactions(): array
     {
         return array_filter($this->transactionHistory->getTransactions(), function (Transaction $transaction) {
             return

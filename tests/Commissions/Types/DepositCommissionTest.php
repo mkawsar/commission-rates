@@ -14,17 +14,17 @@ final class DepositCommissionTest extends TestCase
     /**
      * @var CurrencyService
      */
-    private $currencyService;
+    private CurrencyService $currencyService;
 
     /**
      * @var Transaction
      */
-    private $transaction;
+    private Transaction $transaction;
 
     /**
      * @var Amount
      */
-    private $amount;
+    private Amount $amount;
 
     public function setUp(): void
     {

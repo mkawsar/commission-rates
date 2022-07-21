@@ -2,6 +2,7 @@
 
 namespace Transaction\CommissionFee\Services;
 
+use Transaction\CommissionFee\Commissions\CommissionTypeInterface;
 use Transaction\CommissionFee\Commissions\Types\DepositCommission;
 use Transaction\CommissionFee\Commissions\Types\WithdrawalBusinessCommission;
 use Transaction\CommissionFee\Commissions\Types\WithdrawPrivateCommission;
@@ -15,12 +16,12 @@ class CommissionService
     /**
      * @var TransactionCollection
      */
-    protected $transactionCollection;
+    protected TransactionCollection $transactionCollection;
 
     /**
      * @var CurrencyService
      */
-    protected $currencyService;
+    protected CurrencyService $currencyService;
 
     /**
      * CommissionCalculator constructor.
@@ -38,22 +39,22 @@ class CommissionService
      *
      * @return array
      */
-    public function calculateFeesFromCollection(TransactionCollection $collection)
+    public function calculateFeesFromCollection(TransactionCollection $collection): array
     {
         $fees = [];
         foreach ($collection->getTransactions() as $transaction) {
-            $commission = $this->generateCommission(
-                $this->currencyService,
-                $transaction,
-                $collection
-            );
+            $commission = $this->generateCommission($this->currencyService, $transaction, $collection);
             $fees[] = $this->currencyService->roundAndFormat($commission->calculate());
         }
 
         return $fees;
     }
 
-    public function generateCommission(CurrencyService $currencyService, Transaction $transaction, TransactionCollection $transactionCollection)
+    public function generateCommission(
+        CurrencyService       $currencyService,
+        Transaction           $transaction,
+        TransactionCollection $transactionCollection
+    ): CommissionTypeInterface
     {
 
         switch ($transaction->getOperationType()) {

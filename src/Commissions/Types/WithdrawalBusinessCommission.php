@@ -24,7 +24,7 @@ class WithdrawalBusinessCommission extends Commission implements CommissionTypeI
     /**
      * @return Amount
      */
-    public function calculate()
+    public function calculate(): Amount
     {
         $commission = $this->getFee(self::COMMISSION_PERCENTAGE);
         $minCommission = new Amount(self::MIN_COMMISSION['fee'], self::MIN_COMMISSION['currency']);

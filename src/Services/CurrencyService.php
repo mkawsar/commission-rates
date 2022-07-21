@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Transaction\CommissionFee\Services;
 
 use Transaction\CommissionFee\Exceptions\InvalidCurrencyException;
@@ -16,14 +17,14 @@ class CurrencyService
     /**
      * @var Currency[]
      */
-    protected $currencies = [];
+    protected array $currencies = [];
 
     /**
      * @param array $currencies
      *
      * @return $this
      */
-    public function collectCurrenciesFromArray(array $currencies)
+    public function collectCurrenciesFromArray(array $currencies): self
     {
         foreach ($currencies as $currency) {
             $this->currencies[$currency['symbol']] = new Currency(...array_values($currency));
@@ -38,7 +39,7 @@ class CurrencyService
      *
      * @return Amount
      */
-    public function convert(Amount $amount, $symbol)
+    public function convert(Amount $amount, $symbol): Amount
     {
         $multiplier = bcdiv(
             $this->getCurrencyRateForSymbol($symbol),
@@ -57,9 +58,9 @@ class CurrencyService
      * @param string $decimalPoint
      * @param string $thousandsSeparator
      *
-     * @return int|float
+     * @return int|float|string
      */
-    public function roundAndFormat(Amount $amount, $decimalPoint = '.', $thousandsSeparator = '')
+    public function roundAndFormat(Amount $amount, string $decimalPoint = '.', string $thousandsSeparator = ''): int|float|string
     {
         $precision = $this->getCurrencyPrecisionForSymbol($amount->getSymbol());
         $multiplier = bcpow(self::ARITHMETIC_SCALE, $precision);
@@ -78,7 +79,7 @@ class CurrencyService
      *
      * @return Amount
      */
-    public function getPercentageOfAmount(Amount $amount, $percentage)
+    public function getPercentageOfAmount(Amount $amount, $percentage): Amount
     {
         return new Amount(
             bcmul(
@@ -112,7 +113,7 @@ class CurrencyService
      *
      * @return Amount
      */
-    public function sumAmounts(Amount $firstAmount, Amount $secondAmount, $symbol)
+    public function sumAmounts(Amount $firstAmount, Amount $secondAmount, $symbol): Amount
     {
         return new Amount(
             bcadd(
@@ -131,7 +132,7 @@ class CurrencyService
      *
      * @return Amount
      */
-    public function subAmount(Amount $firstAmount, Amount $secondAmount, $currencySymbol)
+    public function subAmount(Amount $firstAmount, Amount $secondAmount, $currencySymbol): Amount
     {
         return new Amount(
             bcsub(
@@ -148,7 +149,7 @@ class CurrencyService
      *
      * @return float|int
      */
-    private function getCurrencyRateForSymbol($symbol)
+    private function getCurrencyRateForSymbol($symbol): float|int
     {
         return $this->getCurrencyOfSymbol($symbol)->getRate();
     }
@@ -158,7 +159,7 @@ class CurrencyService
      *
      * @return int
      */
-    private function getCurrencyPrecisionForSymbol($symbol)
+    private function getCurrencyPrecisionForSymbol($symbol): int
     {
         return $this->getCurrencyOfSymbol($symbol)->getPrecision();
     }
@@ -169,7 +170,7 @@ class CurrencyService
      * @return Currency
      * @throws InvalidCurrencyException
      */
-    private function getCurrencyOfSymbol($symbol)
+    private function getCurrencyOfSymbol($symbol): Currency
     {
         if (isset($this->currencies[$symbol])) {
             return $this->currencies[$symbol];

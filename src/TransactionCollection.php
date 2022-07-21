@@ -9,7 +9,7 @@ use Transaction\CommissionFee\Models\Transaction;
 
 class TransactionCollection
 {
-    protected $transactions = [];
+    protected array $transactions = [];
 
     public function parseFromCSV($path, $append = false)
     {
@@ -34,7 +34,7 @@ class TransactionCollection
     /**
      * @return int
      */
-    private function generateTransactionID()
+    private function generateTransactionID(): int
     {
         return $this->isEmpty() ? 1 : end($this->transactions)->getTransactionID() + 1;
     }
@@ -42,7 +42,7 @@ class TransactionCollection
     /**
      * @return Transaction[]
      */
-    public function getTransactions()
+    public function getTransactions(): array
     {
         return $this->transactions;
     }
@@ -52,7 +52,7 @@ class TransactionCollection
      *
      * @return $this
      */
-    public function add(Transaction $transaction)
+    public function add(Transaction $transaction): self
     {
         $this->transactions[] = $transaction;
 
@@ -62,7 +62,7 @@ class TransactionCollection
     /**
      * @return bool
      */
-    private function isEmpty()
+    private function isEmpty(): bool
     {
         return empty($this->getTransactions());
     }

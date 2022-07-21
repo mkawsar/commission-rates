@@ -9,5 +9,5 @@ interface CommissionTypeInterface
     /**
      * @return Amount
      */
-    public function calculate();
+    public function calculate(): Amount;
 }

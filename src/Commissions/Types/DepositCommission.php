@@ -24,7 +24,7 @@ class DepositCommission extends Commission implements CommissionTypeInterface
     /**
      * @return Amount
      */
-    public function calculate()
+    public function calculate(): Amount
     {
         $commission = $this->getFee(self::COMMISSION_PERCENTAGE);
         $maxCommission = new Amount(self::MAX_COMMISSION['fee'], self::MAX_COMMISSION['currency']);

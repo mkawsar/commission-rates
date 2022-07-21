@@ -2,6 +2,7 @@
 
 namespace Transaction\CommissionFee\Commissions;
 
+use Transaction\CommissionFee\Models\Amount;
 use Transaction\CommissionFee\Models\Transaction;
 use Transaction\CommissionFee\Services\CurrencyService;
 
@@ -10,12 +11,12 @@ abstract class Commission
     /**
      * @var Transaction
      */
-    protected $transaction;
+    protected Transaction $transaction;
 
     /**
      * @var CurrencyService
      */
-    protected $currencyService;
+    protected CurrencyService $currencyService;
 
     /**
      * Commission constructor.
@@ -29,7 +30,7 @@ abstract class Commission
         $this->currencyService = $currencyService;
     }
 
-    protected function getFee($rate, $feeAbleAmount = null)
+    protected function getFee($rate, $feeAbleAmount = null): Amount
     {
         $amount = $feeAbleAmount ?? $this->transaction->getAmount();
 
